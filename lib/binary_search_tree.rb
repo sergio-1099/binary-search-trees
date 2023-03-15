@@ -12,3 +12,9 @@ class Node
     @right_node = nil
   end
 end
+
+class Tree
+  def initialize(array)
+    @root = self.build_tree
+  end
+end
