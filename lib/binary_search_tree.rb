@@ -7,8 +7,8 @@ class Node
     self.value <=> other_node.value
   end
 
-  def initialize
-    @value = nil
+  def initialize(value = nil)
+    @value = value
     @left_node = nil
     @right_node = nil
   end
@@ -35,6 +35,35 @@ class Tree
       root.right_node = self.build_tree(array[array.size/2+1..array.size-1])
     end
     return root
+  end
+
+  def insert(value)
+    new_node = Node.new(value)
+    tree_node = @root
+    inserted = false
+
+    # while the node is not inserted
+    while (!inserted)
+      if (new_node > tree_node)
+        # if right_node is empty, insert node
+        if (tree_node.right_node.nil?)
+          tree_node.right_node = new_node
+          inserted = true
+        # else, traverse tree further
+        else
+          tree_node = tree_node.right_node
+        end
+      elsif (new_node < tree_node)
+        # left_node is empty, insert node
+        if (tree_node.left_node.nil?)
+          tree_node.left_node = new_node
+          inserted = true
+        # else, traverse tree further
+        else
+          tree_node = tree_node.left_node
+        end
+      end
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
