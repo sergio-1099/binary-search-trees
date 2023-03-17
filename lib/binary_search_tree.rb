@@ -66,6 +66,14 @@ class Tree
     end
   end
 
+  def minValue(root = @root)
+    if (root.left_node.nil?)
+      return root
+    else
+      min = minValue(root.left_node)
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
