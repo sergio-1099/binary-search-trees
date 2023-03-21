@@ -122,16 +122,19 @@ class Tree
   end
 
   def find(value, root = @root)
-    # If end of tree has been reached and value is not found
-    if (root.right_node.nil? && root.left_node.nil? && value != root.value)
-      return "Value: #{value} does not exist in the tree"
-    end
-
     # Traverses tree using recursion to return node with value specified
     if (value < root.value)
-      find(value, root.left_node)
+      if (!root.left_node.nil?)
+        find(value, root.left_node)
+      else 
+        return "Value: #{value} does not exist in the tree"
+      end
     elsif (value > root.value)
-      find(value, root.right_node)
+      if (!root.right_node.nil?)
+        find(value, root.right_node)
+      else
+        return "Value: #{value} does not exist in the tree"
+      end
     elsif (value == root.value)
       return root
     end
