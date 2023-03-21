@@ -99,9 +99,17 @@ class Tree
 
   def minValue(root = @root)
     if (root.left_node.nil?)
-      return root
+      return root.value
     else
-      min = minValue(root.left_node)
+      minValue(root.left_node)
+    end
+  end
+
+  def maxValue(root = @root)
+    if (root.right_node.nil?)
+      return root.value
+    else
+      maxValue(root.right_node)
     end
   end
 
