@@ -82,7 +82,7 @@ class Tree
     elsif (root.right_node.nil? && !(root.left_node.nil?))
       return root.left_node
     elsif (!(root.right_node.nil?) && !(root.left_node.nil?))
-      successor = minValue(root.right_node)
+      successor = minRoot(root.right_node)
       temp_right = delete(successor.value, root.right_node)
       successor.left_node = root.left_node
       successor.right_node = temp_right
@@ -94,6 +94,14 @@ class Tree
       end
 
       return successor
+    end
+  end
+
+  def minRoot(root = @root)
+    if (root.left_node.nil?)
+      return root
+    else
+      minRoot(root.left_node)
     end
   end
 
