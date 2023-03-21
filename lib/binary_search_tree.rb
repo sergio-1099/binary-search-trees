@@ -121,6 +121,22 @@ class Tree
     end
   end
 
+  def find(value, root = @root)
+    # If end of tree has been reached and value is not found
+    if (root.right_node.nil? && root.left_node.nil? && value != root.value)
+      return "Value: #{value} does not exist in the tree"
+    end
+
+    # Traverses tree using recursion to return node with value specified
+    if (value < root.value)
+      find(value, root.left_node)
+    elsif (value > root.value)
+      find(value, root.right_node)
+    elsif (value == root.value)
+      return root
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
