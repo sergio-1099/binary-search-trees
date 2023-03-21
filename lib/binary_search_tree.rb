@@ -66,6 +66,37 @@ class Tree
     end
   end
 
+  def delete(value, root = @root)
+    if (value < root.value)
+      root.left_node = delete(value, root.left_node)
+      return root
+    elsif (value > root.value)
+      root.right_node = delete(value, root.right_node)
+      return root
+    end
+
+    if (root.right_node.nil? && root.left_node.nil?)
+      return nil
+    elsif (!(root.right_node.nil?) && root.left_node.nil?)
+      return root.right_node
+    elsif (root.right_node.nil? && !(root.left_node.nil?))
+      return root.left_node
+    elsif (!(root.right_node.nil?) && !(root.left_node.nil?))
+      successor = minValue(root.right_node)
+      temp_right = delete(successor.value, root.right_node)
+      successor.left_node = root.left_node
+      successor.right_node = temp_right
+
+      # Check just in case removing root of entire tree
+      if (@root.value == value)
+        @root = successor
+        return
+      end
+
+      return successor
+    end
+  end
+
   def minValue(root = @root)
     if (root.left_node.nil?)
       return root
