@@ -140,6 +140,36 @@ class Tree
     end
   end
 
+  def level_order(queue = [@root])
+    # Code if no block given, traverse and return array of values
+    if (!block_given?)
+      opt_array = []
+      while (queue != [])
+        current_node = queue.shift
+        if !current_node.left_node.nil?
+          queue << current_node.left_node
+        end
+        if !current_node.right_node.nil?
+          queue << current_node.right_node
+        end
+        opt_array << current_node.value
+      end
+      return opt_array
+    end
+
+    # If block is given, traverse and yield each node in level order to block
+    while (queue != [])
+      current_node = queue.shift
+      if !current_node.left_node.nil?
+        queue << current_node.left_node
+      end
+      if !current_node.right_node.nil?
+        queue << current_node.right_node
+      end
+      yield(current_node)
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
