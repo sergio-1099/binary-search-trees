@@ -121,6 +121,22 @@ class Tree
     end
   end
 
+  def left_child?(node)
+    if (node.left_node.nil?)
+      return false
+    else  
+      return true
+    end
+  end
+
+  def right_child?(node)
+    if (node.right_node.nil?)
+      return false
+    else 
+      return true
+    end
+  end
+
   def find(value, root = @root)
     # Traverses tree using recursion to return node with value specified
     if (value < root.value)
@@ -167,6 +183,27 @@ class Tree
         queue << current_node.right_node
       end
       yield(current_node)
+    end
+  end
+
+  def inorder(current_node = @root, array = [], &block)
+    if (block_given?)
+      if (left_child?(current_node))
+        left_node = inorder(current_node.left_node, [], &block)
+      end
+      yield(current_node)
+      if (right_child?(current_node))
+        right_node = inorder(current_node.right_node, [], &block)
+      end
+    else
+      if (left_child?(current_node))
+        left_node = inorder(current_node.left_node, array, &block)
+      end
+      array << current_node.value
+      if (right_child?(current_node))
+        right_node = inorder(current_node.right_node, array, &block)
+      end
+      return array
     end
   end
 
