@@ -207,6 +207,27 @@ class Tree
     end
   end
 
+  def preorder(current_node = @root, array = [], &block)
+    if (block_given?)
+      yield(current_node)
+      if (left_child?(current_node))
+        left_node = preorder(current_node.left_node, [], &block)
+      end
+      if (right_child?(current_node))
+        right_node = preorder(current_node.right_node, [], &block)
+      end
+    else
+      array << current_node.value
+      if (left_child?(current_node))
+        left_node = preorder(current_node.left_node, array, &block)
+      end
+      if (right_child?(current_node))
+        right_node = preorder(current_node.right_node, array, &block)
+      end
+      return array
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
