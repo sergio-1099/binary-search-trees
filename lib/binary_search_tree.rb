@@ -273,14 +273,3 @@ class Tree
     pretty_print(node.left_node, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_node
   end
 end
-
-tree = Tree.new([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-
-tree.insert(5)
-tree.insert(76)
-tree.insert(77)
-tree.insert(69)
-
-tree.pretty_print
-
-p tree.height(tree.find(90))
