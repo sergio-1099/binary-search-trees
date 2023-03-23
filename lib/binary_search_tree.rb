@@ -292,6 +292,14 @@ class Tree
     end
   end
 
+  def rebalance!
+    if (!balanced?)
+      return self.initialize(self.inorder)
+    else
+      puts "Tree is already balanced!"
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
