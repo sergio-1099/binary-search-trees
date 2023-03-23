@@ -249,9 +249,38 @@ class Tree
     end
   end
 
+  def height(node = @root)
+    left_height = 0
+    right_height = 0
+    if (left_child?(node))
+      left_height = height(node.left_node)
+      left_height += 1
+    end
+    if (right_child?(node))
+      right_height = height(node.right_node)
+      right_height += 1
+    end
+    if (left_height > right_height)
+      return left_height
+    else
+      return right_height
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
     pretty_print(node.left_node, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_node
   end
 end
+
+tree = Tree.new([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+
+tree.insert(5)
+tree.insert(76)
+tree.insert(77)
+tree.insert(69)
+
+tree.pretty_print
+
+p tree.height(tree.find(90))
