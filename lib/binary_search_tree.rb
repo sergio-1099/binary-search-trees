@@ -267,6 +267,20 @@ class Tree
     end
   end
 
+  def depth(node = @root, current_node = @root)
+    depth = 0
+    while (node.value != current_node.value)
+      if (node.value < current_node.value)
+        current_node = current_node.left_node
+        depth += 1
+      elsif (node.value > current_node.value)
+        current_node = current_node.right_node
+        depth += 1
+      end
+    end
+    return depth
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
