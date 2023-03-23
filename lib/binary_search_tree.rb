@@ -281,6 +281,17 @@ class Tree
     return depth
   end
 
+  def balanced?
+    left_height = height(@root.left_node)
+    right_height = height(@root.right_node)
+
+    if (left_height - right_height <= -1 || left_height - right_height <= 1)
+      return true
+    else
+      return false
+    end
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_node, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_node
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
