@@ -1,5 +1,4 @@
 require_relative('binary_search_tree')
-require 'pry-byebug'
 
 array = (Array.new(15) { rand(1..100) })
 tree = Tree.new(array)
