@@ -1,4 +1,3 @@
-require 'pry-byebug'
 class Node
   include Comparable
   attr_accessor :value, :left_node, :right_node
@@ -285,7 +284,7 @@ class Tree
     left_height = height(@root.left_node)
     right_height = height(@root.right_node)
 
-    if (left_height - right_height <= -1 || left_height - right_height <= 1)
+    if (left_height - right_height >= -1 && left_height - right_height <= 1)
       return true
     else
       return false
